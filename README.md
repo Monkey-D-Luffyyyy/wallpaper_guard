@@ -49,12 +49,47 @@ The script uses:
 - **Dependencies**: 
   - `pywin32` (for Windows Registry access)
 
-## 🚀 Installation
+## 🚀 Installation & Dependencies
+1. **Install Python Dependencies**
+- This script requires the pywin32 library to interact with the Windows Registry (winreg).
+  Open your Command Prompt (cmd) or PowerShell, navigate to the project folder, and run:
+- **pip install pywin32**
+
+3. **Set Your Wallpaper Path**
+- Open wallpaper_guard.py in a text editor (like VS Code or Notepad) and update the WALLPAPER_PATH variable to point to       your desired image:
+# Change this to the actual path of your image
+WALLPAPER_PATH = r"C:\Users\YourName\Pictures\my_wallpaper.png"  
+
+- ⚠️ Note: Use raw strings (r"...") for Windows paths to avoid escape character issues. If your image is in OneDrive, right-click the file in File Explorer and select "Always keep on this device" so it is available offline.
+
+- 🔁 Automating at Startup (Silent VBScript)
+- If you want the script to run automatically when Windows boots up, and you want it to run completely silently (no black command prompt window), follow these steps:
+- Step 1: Create the VBScript Launcher
+- Open Notepad.
+- Paste the following code:
+Set WshShell = CreateObject("WScript.Shell")
+' Update the path below to where your wallpaper_guard.py is located
+WshShell.Run "pythonw ""C:\full\path\to\wallpaper_guard.py""", 0, False
+
+(Make sure to change C:\full\path\to\... to the actual location of your script!)
+
+- Go to File > Save As.
+- Name the file start_guard.vbs.
+- Crucial: Change "Save as type" at the bottom to "All Files (.)" so it doesn't save as a .txt file.
+- Save it in the same folder as your Python script.
+- 💡 Why pythonw? We use pythonw.exe instead of python.exe. The "w" stands for "windowless", meaning it runs Python scripts in the background without opening a console window.
+- Step 2: Add to Windows Startup
+- Press Win + R on your keyboard to open the Run dialog.
+- Type shell:startup and press Enter. This opens your personal Windows Startup folder.
+- Copy or Move your start_guard.vbs file into this Startup folder.
+
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/wallpaper_guard.git
 cd wallpaper_guard
+
+
 
 
